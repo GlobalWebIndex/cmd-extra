@@ -1,7 +1,7 @@
 {
     "version": "1.0.0",
-    "summary": "helpful summary of your project, less than 80 characters",
-    "repository": "https://github.com/user/project.git",
+    "summary": "Extra functions for working with Cmds",
+    "repository": "https://github.com/GlobalWebIndex/cmd-extra.git",
     "license": "BSD3",
     "source-directories": [
         "src"
