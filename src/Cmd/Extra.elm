@@ -1,8 +1,12 @@
 module Cmd.Extra exposing (perform, attempt)
 
 {-| Extra functions for working with Cmds.
+
+
 # Basics
+
 @docs perform, attempt
+
 -}
 
 import Task
@@ -11,28 +15,35 @@ import Task
 -- Public Api
 
 
+possibly : (a -> Cmd msg) -> Maybe a -> Cmd msg
+possibly construct maybe =
+    Maybe.map construct maybe
+        |> Maybe.withDefault Cmd.none
+
+
 {-| Cmd costructor.
 Usefull when you want to artificially emit Cmd from update function.
 
-```
-perform "Hi" : Cmd String
-perform 1 : Cmd number
-```
+    perform "Hi" : Cmd String
+    perform 1 : Cmd number
 
 "real world" exaple:
 
-```
-type alias Model = ()
-type Msg = Fire | FireRockets
+    type alias Model =
+        ()
 
-update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-  case msg of
-    Fire ->
-      ((), perform FireRockets)
-    FireRockets ->
-      Debug.crash "World ended:("
-```
+    type Msg
+        = Fire
+        | FireRockets
+
+    update : Msg -> Model -> ( Model, Cmd Msg )
+    update msg model =
+        case msg of
+            Fire ->
+                ( (), perform FireRockets )
+
+            FireRockets ->
+                Debug.crash "World ended:("
 
 -}
 perform : msg -> Cmd msg
@@ -41,11 +52,11 @@ perform =
 
 
 {-| Similar to perform but takes `Result msg` and performs action only on `Ok`.
-```
-attempt (Ok 1) : Cmd number
-attempt (Ok "I'm fine") : Cmd String
-attempt (Err "Failed") == Cmd.none => True
-```
+
+    attempt (Ok 1) : Cmd number
+    attempt (Ok "I'm fine") : Cmd String
+    attempt (Err "Failed") == Cmd.none => True
+
 -}
 attempt : Result x msg -> Cmd msg
 attempt =
