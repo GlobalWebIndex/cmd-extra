@@ -78,7 +78,7 @@ attempt =
     Result.withDefault Cmd.none << Result.map perform
 
 
-{-| Similar to attempt byt works with `Maybe` instead
+{-| Similar to attempt but works with `Maybe` instead
 
     maybeCmd : Cmd String
     maybeCmd =
@@ -146,28 +146,28 @@ pure model =
     ( model, Cmd.none )
 
 
-{-| Add Cmd to model to create pair.
+{-| Add Cmd to model to create a pair.
 -}
 with : Cmd msg -> model -> ( model, Cmd msg )
 with cmd model =
     ( model, cmd )
 
 
-{-| Add new cmd to existing pair.
+{-| Add new cmd to an existing pair.
 -}
 add : Cmd msg -> ( model, Cmd msg ) -> ( model, Cmd msg )
 add newCmd ( model, prevCmd ) =
     ( model, Cmd.batch [ newCmd, prevCmd ] )
 
 
-{-| Trigger Cmd from Msg and create pair
+{-| Trigger Cmd from Msg and create a pair
 -}
 withTrigger : msg -> model -> ( model, Cmd msg )
 withTrigger msg =
     with <| perform msg
 
 
-{-| Add new trigger of Msg to existing pair.
+{-| Add new trigger of Msg to an existing pair.
 -}
 addTrigger : msg -> ( model, Cmd msg ) -> ( model, Cmd msg )
 addTrigger msg =
