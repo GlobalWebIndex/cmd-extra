@@ -1,16 +1,7 @@
-module Cmd.Extra
-    exposing
-        ( add
-        , addTrigger
-        , attempt
-        , fromMaybe
-        , fromResult
-        , maybe
-        , perform
-        , pure
-        , with
-        , withTrigger
-        )
+module Cmd.Extra exposing
+    ( perform, attempt, maybe, fromResult, fromMaybe
+    , pure, with, add, withTrigger, addTrigger
+    )
 
 {-| Extra functions for working with Cmds.
 
@@ -27,6 +18,7 @@ module Cmd.Extra
 -}
 
 import Task
+
 
 
 -- Constructors
@@ -89,18 +81,18 @@ attempt =
 
 -}
 maybe : Maybe msg -> Cmd msg
-maybe maybe =
-    Maybe.map perform maybe
+maybe maybeMsg =
+    Maybe.map perform maybeMsg
         |> Maybe.withDefault Cmd.none
 
 
 {-| Construct from Result.
 
-    resultCmd : Cmd String
+    resultCmd : Cmd (Result Never Int)
     resultCmd =
-      fromResult toString (Ok 1)
+      fromResult identity (Ok 1)
 
-    fromResult toString (Err ())
+    fromResult identity (Err ())
     --> Cmd.none
 
 -}
@@ -112,11 +104,11 @@ fromResult const res =
 
 {-| Construct from Maybe.
 
-    stringCmd : Cmd String
-    stringCmd =
-      toString (Just 1)
+    maybeCmd : Cmd (Maybe Int)
+    maybeCmd =
+      identity (Just 1)
 
-    fromMaybe toString Nothing
+    fromMaybe identity Nothing
     --> Cmd.none
 
 -}
