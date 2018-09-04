@@ -2,11 +2,11 @@
 
 Experimental package with helpful functions for working with Cmd.
 
-This package adds some functions that helps you with constructing of `Cmd msg` from given `msg` and theirs manipulation.
+This package adds some functions that helps you with constructing of `(model, Cmd msg)` pair from given `model` and `msg` and theirs manipulation.
 
 ```
     type Msg
-        = DoNothing
+        = NoOp
         | Disarm
         | Fire
         | FireRockets
@@ -15,12 +15,12 @@ This package adds some functions that helps you with constructing of `Cmd msg` f
     update msg model =
         case msg of
             DoNothing ->
-                Cmd.Extra.pure
+                Cmd.Extra.pure model
                 -- equivalent of (model, Cmd.Extra.none)
 
             Disarm ->
-                Cmd.Extra.withTrigger DoNothing model
-                -- equivalent of (model, Cmd.Extra.perform DoNothing)
+                Cmd.Extra.withTrigger NoOp model
+                -- equivalent of (model, Cmd.Extra.perform NoOp)
 
             Fire ->
                 ( model, Cmd.Extra.perform FireRockets )
