@@ -2,7 +2,7 @@
 
 Experimental package with helpful functions for working with Cmd.
 
-This package adds some functions that helps you with constructing of `(model, Cmd msg)` pair from given `model` and `msg` and theirs manipulation.
+This package can help you with construction of `Cmd msg` and composition of pair `(model, Cmd msg)` that can be used to streamline your flow of actions in `update`.
 
 ```
     type Msg
