@@ -72,7 +72,7 @@ attempt =
 
 {-| Similar to attempt but works with `Maybe` instead
 
-    maybeCmd : Cmd String
+    maybeCmd : Cmd Int
     maybeCmd =
         maybe <| Just 1
 

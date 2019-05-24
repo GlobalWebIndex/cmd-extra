@@ -1,0 +1,27 @@
+{
+  "name": "cmd-extra",
+  "version": "1.0.0",
+  "description": "Experimental package with helpful functions for working with Cmd.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "elm-verify-examples": "npx elm-verify-examples --elm-test=./node_modules/.bin/elm-test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GlobalWebIndex/cmd-extra.git"
+  },
+  "author": "",
+  "license": "BSD-3-Clause",
+  "bugs": {
+    "url": "https://github.com/GlobalWebIndex/cmd-extra/issues"
+  },
+  "homepage": "https://github.com/GlobalWebIndex/cmd-extra#readme",
+  "dependencies": {
+    "elm": "^0.19.0-no-deps",
+    "elm-test": "^0.19.0-rev6",
+    "elm-verify-examples": "^3.1.0"
+  }
+}
