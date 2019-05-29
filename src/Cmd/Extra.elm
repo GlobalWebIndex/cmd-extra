@@ -25,7 +25,7 @@ import Task
 
 
 {-| Cmd costructor.
-Usefull when you want to artificially emit Cmd from update function.
+Useful when you want to artificially emit Cmd from update function.
 
     performed : Cmd String
     performed =
