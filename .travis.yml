@@ -1,0 +1,9 @@
+language: elm
+elm:
+  - elm0.19.0
+
+install:
+  - yarn install
+
+script:
+  - yarn elm-verify-examples
