@@ -6,4 +6,4 @@ install:
   - yarn install
 
 script:
-  - yarn elm-verify-examples
+  - yarn verify-examples
