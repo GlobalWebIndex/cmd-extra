@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "elm-verify-examples": "npx elm-verify-examples --elm-test=./node_modules/.bin/elm-test"
+    "elm-verify-examples": "npx elm-verify-examples --elm-test=./node_modules/.bin/elm-test && ./node_modules/.bin/elm-test"
   },
   "repository": {
     "type": "git",
