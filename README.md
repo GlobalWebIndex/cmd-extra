@@ -4,7 +4,7 @@ Experimental package with helpful functions for working with Cmd.
 
 This package can help you with construction of `Cmd msg` and composition of pair `(model, Cmd msg)` that can be used to streamline your flow of actions in `update`.
 
-```
+```elm
     type Msg
         = NoOp
         | Disarm
@@ -16,7 +16,7 @@ This package can help you with construction of `Cmd msg` and composition of pair
         case msg of
             DoNothing ->
                 Cmd.Extra.pure model
-                -- equivalent of (model, Cmd.Extra.none)
+                -- equivalent of (model, Cmd.none)
 
             Disarm ->
                 Cmd.Extra.withTrigger NoOp model
