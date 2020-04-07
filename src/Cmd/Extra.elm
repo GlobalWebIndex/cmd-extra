@@ -1,6 +1,6 @@
 module Cmd.Extra exposing
     ( perform, attempt, maybe, fromResult, fromMaybe
-    , pure, with, add, withTrigger, addTrigger
+    , pure, with, add, withTrigger, addTrigger, addIf
     )
 
 {-| Extra functions for working with Cmds.
@@ -13,7 +13,7 @@ module Cmd.Extra exposing
 
 # Chaining in update
 
-@docs pure, with, add, withTrigger, addTrigger
+@docs pure, with, add, withTrigger, addTrigger, addIf
 
 -}
 
@@ -164,3 +164,31 @@ withTrigger msg =
 addTrigger : msg -> ( model, Cmd msg ) -> ( model, Cmd msg )
 addTrigger msg =
     add <| perform msg
+
+
+{-| Add new cmd to an existing pair under a certain condition.
+
+    prevCmd : Cmd String
+    prevCmd =
+        perform "foo"
+
+    newCmd : Cmd String
+    newCmd =
+        perform "bar"
+
+    ( "model", prevCmd )
+      |> addIf False newCmd
+      |> Tuple.second
+      |> ((==) prevCmd)
+    --> True
+
+-}
+addIf : Bool -> Cmd msg -> ( model, Cmd msg ) -> ( model, Cmd msg )
+addIf predicate newCmd ( model, prevCmd ) =
+    ( model
+    , if predicate then
+        Cmd.batch [ newCmd, prevCmd ]
+
+      else
+        prevCmd
+    )
