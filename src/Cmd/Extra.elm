@@ -200,7 +200,7 @@ addTriggerMaybe : Maybe msg -> ( model, Cmd msg ) -> ( model, Cmd msg )
 addTriggerMaybe maybeMsg ( model, cmd ) =
     case maybeMsg of
         Just msg ->
-            Cmd.Extra.addTrigger msg ( model, cmd )
+            addTrigger msg ( model, cmd )
 
         Nothing ->
             ( model, cmd )
