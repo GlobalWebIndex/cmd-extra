@@ -1,6 +1,6 @@
 module Cmd.Extra exposing
     ( perform, attempt, maybe, fromResult, fromMaybe
-    , pure, with, add, withTrigger, addTrigger, addIf
+    , pure, with, add, withTrigger, addTrigger, addIf, addTriggerMaybe
     )
 
 {-| Extra functions for working with Cmds.
@@ -13,7 +13,7 @@ module Cmd.Extra exposing
 
 # Chaining in update
 
-@docs pure, with, add, withTrigger, addTrigger, addIf
+@docs pure, with, add, withTrigger, addTrigger, addIf, addTriggerMaybe
 
 -}
 
@@ -192,3 +192,15 @@ addIf predicate newCmd ( model, prevCmd ) =
       else
         prevCmd
     )
+
+
+{-| `addTrigger` if Just, do nothing if Nothing
+-}
+addTriggerMaybe : Maybe msg -> ( model, Cmd msg ) -> ( model, Cmd msg )
+addTriggerMaybe maybeMsg ( model, cmd ) =
+    case maybeMsg of
+        Just msg ->
+            Cmd.Extra.addTrigger msg ( model, cmd )
+
+        Nothing ->
+            ( model, cmd )
