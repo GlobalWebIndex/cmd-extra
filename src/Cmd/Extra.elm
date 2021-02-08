@@ -1,6 +1,6 @@
 module Cmd.Extra exposing
     ( perform, attempt, maybe, fromResult, fromMaybe
-    , pure, with, add, withTrigger, addTrigger, addIf, addTriggerMaybe
+    , pure, with, add, withTrigger, addTrigger, addIf, addTriggerMaybe, addMaybe
     )
 
 {-| Extra functions for working with Cmds.
@@ -13,7 +13,7 @@ module Cmd.Extra exposing
 
 # Chaining in update
 
-@docs pure, with, add, withTrigger, addTrigger, addIf, addTriggerMaybe
+@docs pure, with, add, withTrigger, addTrigger, addIf, addTriggerMaybe, addMaybe
 
 -}
 
@@ -191,6 +191,27 @@ addIf predicate newCmd ( model, prevCmd ) =
 
       else
         prevCmd
+    )
+
+
+{-| Add new cmd to an existing pair based on the Maybe value
+
+    prevCmd : Cmd String
+    prevCmd =
+        perform "prev"
+
+    ( "model", prevCmd )
+      |> addMaybe identity Nothing
+      |> Tuple.second
+      |> ((==) prevCmd)
+    --> True
+
+-}
+addMaybe : (a -> Cmd msg) -> Maybe a -> ( model, Cmd msg ) -> ( model, Cmd msg )
+addMaybe valueToCmd maybeValue ( model, prevCmd ) =
+    ( model
+    , Maybe.map (\v -> Cmd.batch [ valueToCmd v, prevCmd ]) maybeValue
+        |> Maybe.withDefault prevCmd
     )
 
 
