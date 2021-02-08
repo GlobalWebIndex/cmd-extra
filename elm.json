@@ -3,7 +3,7 @@
     "name": "GlobalWebIndex/cmd-extra",
     "summary": "Extra functions for working with Cmds",
     "license": "BSD-3-Clause",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "exposed-modules": [
         "Cmd.Extra"
     ],
